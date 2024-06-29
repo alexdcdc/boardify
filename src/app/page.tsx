@@ -15,7 +15,7 @@ export default function Home() {
     console.log(signUpDetails);
     event.preventDefault();
     try {
-      const response = await axios.post('/api/test', signUpDetails);
+      const response = await axios.post('/api/register', signUpDetails);
       console.log('Response:', response.data);
     } catch (error) {
       console.error('Error:', error);
