@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       flexGrow: {
-        1: '1',
-        2: '2'
+        '2': '2',
+        '3': '3',
       },
     },
   },
