@@ -1,12 +1,16 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import Link from "next/link";
 import axios from "axios";
 
 
 export default function Home() {
+  const router = useRouter()
   const [formErrors, setFormErrors] = useState({})
   const [signUpDetails, setSignUpDetails] = useState({
+    fname: "",
+    lname: "",
     email: "",
     password: ""
   });
@@ -15,8 +19,11 @@ export default function Home() {
     console.log(signUpDetails);
     event.preventDefault();
     try {
-      const response = await axios.post('/api/register', signUpDetails);
+      const response = await axios.post('/api/sign-up', signUpDetails);
       console.log('Response:', response.data);
+      if (response.data.status == 200) {
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -42,6 +49,18 @@ export default function Home() {
         </div>
         <div className="text-sm font-light text-[#6B7280] pb-8 ">Sign up for an account on boardify.</div>
         <form className="flex flex-col" onSubmit = {postSignUp}>
+        <div className="pb-2">
+            <label htmlFor="fname" className="block mb-2 text-sm font-medium text-[#111827]">First Name</label>
+            <div className="relative text-gray-400">
+              <input name="fname" id="fname" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="John" autoComplete="off" onChange = {updateSignUpDetails}/>
+            </div>
+          </div>
+          <div className="pb-2">
+            <label htmlFor="lname" className="block mb-2 text-sm font-medium text-[#111827]">Last Name</label>
+            <div className="relative text-gray-400">
+              <input name="lname" id="lname" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="Doe" autoComplete="off" onChange = {updateSignUpDetails}/>
+            </div>
+          </div>
           <div className="pb-2">
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-[#111827]">Email</label>
             <div className="relative text-gray-400"><span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></span>

@@ -10,13 +10,10 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, password } = body;
 
-    var hash = bcrypt.hashSync(password, 10);
-    const newUser = {
-        email: email,
-        password: hash
-    };
+    var user = await collection.findOne({email: email});
+    if (user && bcrypt.compareSync(password, user.password)) {
+        return Response.json({status: 200});
+    }
 
-    collection.insertOne(newUser);
-
-    return Response.json({status: 200});
+    return Response.json({status: 401});
 }
