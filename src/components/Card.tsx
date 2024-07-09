@@ -11,7 +11,7 @@ interface CardProps {
 // Create the Card component
 const Card: React.FC<CardProps> = ({ posterName, editedHoursAgo, imageUrl }) => {
     return (
-        <div className="flex flex-col rounded-2xl w-96 bg-[#ffffff] shadow-xl m-2">
+        <div className="flex flex-col rounded-2xl w-72 h-96 bg-[#ffffff] shadow-xl m-2">
             <figure className="flex justify-center items-center rounded-2xl">
                 <img
                     src={imageUrl}

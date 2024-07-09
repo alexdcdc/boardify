@@ -1,5 +1,4 @@
 import clientPromise from "../../../../lib/mongodb";
-import User from "../../../models/User"
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
@@ -19,6 +18,6 @@ export async function POST(req: Request) {
         password: hash
     };
 
-    collection.insertOne(newUser);
-    return Response.json({status: 200});
+    const userId = (await collection.insertOne(newUser)).insertedId.toString();
+    return Response.json({status: 200, userId: userId});
 }
