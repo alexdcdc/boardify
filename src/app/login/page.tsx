@@ -19,7 +19,10 @@ export default function Home() {
       const response = await axios.post('/api/login', loginDetails);
       console.log('Response:', response.data);
       if (response.data.status == 200) {
-        router.push("/dashboard/" + response.data.userId);
+        const { session, userId } = response.data;
+        document.cookie = `session=${session}; path=/`;
+        router.push("/dashboard/" + userId);
+        
       }
     } catch (error) {
       console.error('Error:', error);
