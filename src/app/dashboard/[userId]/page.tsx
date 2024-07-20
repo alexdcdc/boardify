@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import Card from "../../../components/Card";
 import AddButton from "../../../components/AddButton";
