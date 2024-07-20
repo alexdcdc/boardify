@@ -3,8 +3,8 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
     const client = await clientPromise;
-    const db = client.db('boardify'); 
-    const collection = db.collection('users'); 
+    const db = client.db("boardify"); 
+    const collection = db.collection("users"); 
 
     const body = await req.json();
     const { email, password } = body;

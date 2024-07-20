@@ -1,5 +1,5 @@
 // Import necessary dependencies
-import React from 'react';
+import React from "react";
 
 // Define the component props
 interface CardProps {

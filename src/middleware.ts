@@ -1,6 +1,5 @@
-import { NextResponse, NextRequest } from 'next/server'
-import { decrypt } from '../lib/auth';
-import axios from "axios";
+import { NextResponse, NextRequest } from "next/server"
+import { decrypt } from "../lib/auth";
 
 
 export async function middleware(request: NextRequest) {
@@ -9,9 +8,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (request.nextUrl.pathname == "/") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
   
   const session = request.cookies.get("session");
 
@@ -26,15 +22,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/dashboard/" + sessionInfo.userId, request.url));
     }
     return NextResponse.next();
-    /*
-    if (request.nextUrl.pathname == "/dashboard") {
-      
-    }
-
-    if (request.nextUrl.pathname.startsWith("/dashboard/") || request.nextUrl.pathname.startsWith("/document/")) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
-    }
-      */
   }
 
   catch {
@@ -43,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/dashboard/:path*', '/document/:path*'],
+  matcher: ["/", "/dashboard/:path*", "/document/:path*", "/editor/:path*"],
 }
