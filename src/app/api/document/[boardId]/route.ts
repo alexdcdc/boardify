@@ -24,9 +24,15 @@ export async function POST(req: Request, { params } : { params: { boardId: strin
     const collection = db.collection("boards");
     
     const { boardId } = params;
-    const { newData } = await req.json()
+    const newData = await req.json()
 
-    const result = await collection.findOneAndReplace({ _id: ObjectId.createFromHexString(boardId) }, newData);
+    console.log(newData.lastOpened);
+
+    const result = await collection.findOneAndReplace({ _id: ObjectId.createFromHexString(boardId) }, {
+        ownerId: ObjectId.createFromHexString(newData.ownerId),
+        name: newData.name,
+        lastOpened: new Date(newData.lastOpened),
+    });
 
     if (!result) {
         return Response.json({ status: 404 });
