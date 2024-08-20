@@ -16,11 +16,9 @@ export default function Home() {
   });
 
   const postSignUp = async (event: FormEvent<HTMLFormElement>) => {
-    console.log(signUpDetails);
     event.preventDefault();
     try {
       const response = await axios.post("/api/sign-up", signUpDetails);
-      console.log("Response:", response.data);
       if (response.data.status == 200) {
         router.push("/dashboard");
       }
@@ -35,7 +33,6 @@ export default function Home() {
       ...signUpDetails,
       [name]: value
     });
-    console.log(signUpDetails);
   }
 
   const formFields = [

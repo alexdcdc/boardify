@@ -13,11 +13,9 @@ export default function Home() {
   });
 
   const postLogin = async (event: FormEvent<HTMLFormElement>) => {
-    console.log(loginDetails);
     event.preventDefault();
     try {
       const response = await axios.post("/api/login", loginDetails);
-      console.log("Response:", response.data);
       if (response.data.status == 200) {
         const { session, userId } = response.data;
         document.cookie = `session=${session}; path=/`;
@@ -35,7 +33,6 @@ export default function Home() {
       ...loginDetails,
       [name]: value
     });
-    console.log(loginDetails);
   }
 
   const formFields = [

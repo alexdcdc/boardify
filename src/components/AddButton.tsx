@@ -18,7 +18,6 @@ const AddButton: React.FC<AddButtonProps> = ({ userId }) => {
     const makeNewDoc = async () => {
         try {
             const response = await axios.post("/api/document", { userId: userId });
-            console.log("Response:", response.data);
             if (response.data.status == 200) {
                 router.push("/editor/" + response.data.docId);
             }

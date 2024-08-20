@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import env from "./env"
 
 const key = new TextEncoder().encode(env.JWT_SECRET);
-const expirationTimeMs = 20 * 3600 * 1000; //20 mins
+const expirationTimeMs = 120 * 3600 * 1000; //120 mins
 
 export async function encrypt(payload: any) {
     return await new SignJWT(payload)
